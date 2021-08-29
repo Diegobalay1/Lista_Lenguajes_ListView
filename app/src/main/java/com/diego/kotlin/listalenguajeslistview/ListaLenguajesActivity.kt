@@ -22,10 +22,16 @@ class ListaLenguajesActivity : AppCompatActivity() {
                               "C", "Java", "C++", "Python", "Perl", "PHP", "Haskell",
                               "Eiffel", "Lisp", "Pascal", "Cobol", "Swift", "Kotlin"
         )
-        val adaptador = ArrayAdapter(
+        /*val adaptador = ArrayAdapter(
             this,
                    android.R.layout.simple_list_item_1,
                    valores
+        )*/
+        val adaptador = ArrayAdapter(
+            this,
+            R.layout.item_lenguaje,
+            R.id.nombre,
+            valores
         )
         lista.adapter = adaptador
 
