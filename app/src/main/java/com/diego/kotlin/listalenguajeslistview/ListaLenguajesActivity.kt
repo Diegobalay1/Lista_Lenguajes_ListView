@@ -2,8 +2,11 @@ package com.diego.kotlin.listalenguajeslistview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 
 /**
  * En primer lugar, realizaremos un ejemplo básico de listado a partir de un array.
@@ -35,5 +38,29 @@ class ListaLenguajesActivity : AppCompatActivity() {
         )
         lista.adapter = adaptador
 
+        // cada vez que se pulse sobre un elemento de la lista
+        // se mostrará un Toast que indica el item seleccionado.
+        lista.setOnItemClickListener({
+                parent: AdapterView<*>, view: View,
+                position: Int, id: Long ->
+            val elemento = adaptador.getItem(position) as String
+            Toast.makeText(this@ListaLenguajesActivity,
+            "$elemento seleccionado", Toast.LENGTH_LONG).show()
+        })
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
