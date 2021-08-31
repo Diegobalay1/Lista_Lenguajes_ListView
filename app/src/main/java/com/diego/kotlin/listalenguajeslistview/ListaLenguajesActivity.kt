@@ -48,6 +48,16 @@ class ListaLenguajesActivity : AppCompatActivity() {
             "$elemento seleccionado", Toast.LENGTH_LONG).show()
         })
 
+        // cada vez que se haga una pulsación prolongada sobre un
+        // elemento de la lista se mostrará un Toast que indica el item seleccionado.
+        lista.setOnItemLongClickListener { parent, view, position, id ->
+            Toast.makeText(parent.context, "Posición $position pulsada", Toast.LENGTH_LONG).show()
+            // Devolvemos el valor true para evitar que se dispare
+            // también el evento onItemClick
+            true
+        }
+
+
     }
 }
 
