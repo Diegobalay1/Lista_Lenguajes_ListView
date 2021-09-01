@@ -7,6 +7,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 /**
  * En primer lugar, realizaremos un ejemplo básico de listado a partir de un array.
@@ -15,12 +16,20 @@ import android.widget.Toast
  * crearemos adaptadores propios.
  */
 
-class ListaLenguajesActivity : AppCompatActivity() {
+class ListaLenguajesActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
+    private var swipe: SwipeRefreshLayout? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_lenguajes)
 
         val lista = findViewById<ListView>(R.id.lista)
+        lista.emptyView = findViewById(R.id.emptyView)
+
+        //...swipe
+        swipe = findViewById(R.id.swiperefresh)
+        swipe?.setOnRefreshListener(this)
+
         val valores = arrayOf(
                               "C", "Java", "C++", "Python", "Perl", "PHP", "Haskell",
                               "Eiffel", "Lisp", "Pascal", "Cobol", "Swift", "Kotlin"
@@ -40,13 +49,14 @@ class ListaLenguajesActivity : AppCompatActivity() {
 
         // cada vez que se pulse sobre un elemento de la lista
         // se mostrará un Toast que indica el item seleccionado.
-        lista.setOnItemClickListener({
-                parent: AdapterView<*>, view: View,
-                position: Int, id: Long ->
+        lista.setOnItemClickListener { parent: AdapterView<*>, view: View,
+                                       position: Int, id: Long ->
             val elemento = adaptador.getItem(position) as String
-            Toast.makeText(this@ListaLenguajesActivity,
-            "$elemento seleccionado", Toast.LENGTH_LONG).show()
-        })
+            Toast.makeText(
+                this@ListaLenguajesActivity,
+                "$elemento seleccionado", Toast.LENGTH_LONG
+            ).show()
+        }
 
         // cada vez que se haga una pulsación prolongada sobre un
         // elemento de la lista se mostrará un Toast que indica el item seleccionado.
@@ -58,6 +68,13 @@ class ListaLenguajesActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onRefresh() {
+        // Realizar la acción para actualizar datos
+        // ...
+        // Hacemos desaparecer el indicador de progreso
+        swipe?.setRefreshing(false)
     }
 }
 
