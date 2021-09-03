@@ -39,12 +39,27 @@ class ListaLenguajesActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefresh
                    android.R.layout.simple_list_item_1,
                    valores
         )*/
-        val adaptador = ArrayAdapter(
+        /*val adaptador = ArrayAdapter(
             this,
             R.layout.item_lenguaje,
             R.id.nombre,
             valores
+        )*/
+
+        // lista de objetos Lenguaje
+        val lenguajes = mutableListOf<Lenguaje>()
+        lenguajes.add(Lenguaje("C", "Lenguaje procedural", R.mipmap.ic_launcher))
+        lenguajes.add(Lenguaje("Java", "Lenguaje orientado a objetos", R.drawable.ic_java))
+        lenguajes.add(Lenguaje("C++", "Lenguaje orientado a objetos", R.mipmap.ic_launcher))
+        lenguajes.add(Lenguaje("Python", "Lenguaje funcional", R.mipmap.ic_launcher))
+
+        // Inicializamos el adaptador con la lista
+        val adaptador = LenguajesArrayAdapter(
+            this,
+            R.layout.item_lenguaje,
+            lenguajes
         )
+
         lista.adapter = adaptador
 
         // cada vez que se pulse sobre un elemento de la lista
