@@ -74,7 +74,8 @@ class ListaLenguajesActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefresh
         // Realizar la acción para actualizar datos
         // ...
         // Hacemos desaparecer el indicador de progreso
-        swipe?.setRefreshing(false)
+        //swipe?.setRefreshing(false)
+        swipe?.isRefreshing = false
     }
 }
 
